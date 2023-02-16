@@ -28,7 +28,12 @@ final class PlaceTest extends TestCase
             'lng' => 99.9
         ];
 
-        $response = $client->post('/api/locations', ['form_params' => $request]);
+        try {
+            $response = $client->post('/api/locations', ['form_params' => $request]);
+        } catch (ClientException $e) {
+            die("\nError: location creation does not work.\nTests won't work for:\n* Get places\n* Add place\nPlease fix location creation before launching tests.\n");
+        }
+
         $location = json_decode($response->getBody());
 
         file_put_contents(__DIR__ . "/../data/location", $location->id);
@@ -42,7 +47,7 @@ final class PlaceTest extends TestCase
         try {
             $response = $client->post("/api/locations/{$location->id}/places", ['form_params' => $request]);
         } catch (ClientException $e) {
-            die('ko');
+            die("\nError: place creation does not work.\nTests won't work for:\n* Update place\n* Delete place\nPlease fix place creation before launching tests.\n");
         }
 
         $place = json_decode($response->getBody());

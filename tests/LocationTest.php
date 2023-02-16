@@ -14,7 +14,7 @@ final class LocationTest extends TestCase
         global $argv;
 
         if (empty($argv[2])) {
-            die('Error: please enter a URL.');
+            die('Error: please enter a URL.\n');
         }
 
         $client = new GuzzleHttp([
@@ -27,7 +27,12 @@ final class LocationTest extends TestCase
             'lng' => 99.9
         ];
 
-        $response = $client->post('/api/locations', ['form_params' => $request]);
+        try {
+            $response = $client->post('/api/locations', ['form_params' => $request]);
+        } catch (ClientException $e) {
+            die("\nError: location creation does not work.\nTests won't work for:\n* Get location\n* Delete location\nPlease fix location creation before launching tests.\n");
+        }
+
         $location = json_decode($response->getBody());
 
         file_put_contents(__DIR__ . "/../data/location", $location->id);
