@@ -95,6 +95,8 @@ final class LocationTest extends TestCase
         } catch (ClientException $e) {
             $this->assertEquals(404, $e->getCode());
         }
+
+        $this->assertEquals(404, $e->getCode());
     }
 
     public function test_add_location()
@@ -129,6 +131,8 @@ final class LocationTest extends TestCase
         } catch (ClientException $e) {
             $this->assertEquals(422, $e->getCode());
         }
+
+        $this->assertEquals(422, $e->getCode());
     }
 
     public function test_delete_location()
@@ -148,5 +152,7 @@ final class LocationTest extends TestCase
         } catch (ClientException $e) {
             $this->assertEquals(404, $e->getCode());
         }
+
+        $this->assertEquals(404, $e->getCode());
     }
 }

@@ -116,6 +116,8 @@ final class PlaceTest extends TestCase
         } catch (ClientException $e) {
             $this->assertEquals(422, $e->getCode());
         }
+
+        $this->assertEquals(422, $e->getCode());
     }
 
     public function test_update_place()
@@ -151,6 +153,8 @@ final class PlaceTest extends TestCase
         } catch (ClientException $e) {
             $this->assertEquals(422, $e->getCode());
         }
+
+        $this->assertEquals(422, $e->getCode());
     }
 
     public function test_update_place_does_not_exist()
@@ -162,10 +166,12 @@ final class PlaceTest extends TestCase
         ];
 
         try {
-            $this->client->put("/api/places/999", ['form_params' => $request]);
+            $this->client->put("/api/places/99999", ['form_params' => $request]);
         } catch (ClientException $e) {
             $this->assertEquals(404, $e->getCode());
         }
+
+        $this->assertEquals(404, $e->getCode());
     }
 
     public function test_delete_place()
@@ -187,5 +193,7 @@ final class PlaceTest extends TestCase
         } catch (ClientException $e) {
             $this->assertEquals(404, $e->getCode());
         }
+
+        $this->assertEquals(404, $e->getCode());
     }
 }
