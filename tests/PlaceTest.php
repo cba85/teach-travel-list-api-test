@@ -162,7 +162,8 @@ final class PlaceTest extends TestCase
         $request = [
             'name' => 'Test',
             'lat' => 99.9,
-            'lng' => 99.9
+            'lng' => 99.9,
+            'visited' => 1,
         ];
 
         try {
